@@ -1,0 +1,168 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{polski}
+\usepackage[polish]{babel}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{blindtext}
+\title{Modelowanie mechanizmów reakcji dehydrogenaz 3-ketosteroidowych}
+% \date{2017\\ December}
+\author{Michał Glanowski\\ Instytut Katalizy i Fizykochemii Powierzchni PAN im. Jerzego Habera}
+\graphicspath{ {./images/} }
+
+\newcommand{\angstrom}{\mbox{\normalfont\AA}}
+
+\begin{document}
+\maketitle
+\begin{section} {Porównanie struktur krystalicznych 4c3y oraz 4c3x}
+
+Dehydrogenaza pochodząca z \textit{Rhodococus erythropolis} została skrytalizowana z produktem zadokowanym w centrum aktywnym oraz bez. Każda z tych struktur zawiera 2 tetramery 
+białek. Poniżej krótkie zestawienie niektórych parametrów geometrycznych (wszystkie obliczone jako średnia z ośmiu struktur).
+
+ \begin{tabular}{||c c c c c||} 
+ \hline
+ Struktura & Atom 1. & Atom 2. & Średnia odległość & Odchylenie standardowe \\ [0.5ex] 
+ \hline\hline
+4c3y & TYR 119 OH &  TYR 318 OH & 2.583 &0.008\\
+4c3x & TYR 119 OH  & TYR 318 OH &  2.618 &0.004\\
+4c3y & TYR 487 OH  & TYR 318 OH & 3.778 &0.005\\
+4c3x & TYR 487 OH  & TYR 318 OH  & 3.261 &0.004\\
+4c3y & TYR 487 OH  & TYR 119 OH & 5.689 &0.015\\
+4c3x & TYR 487 OH  & TYR 119 OH  & 5.306 &0.004\\
+4c3y & FAD N5 &  TYR 318 OH & 5.626 &0.063\\
+4c3x & FAD N5 &  TYR 318 OH &  6.218 &0.048\\
+4c3y & FAD N5 &  TYR 119 OH & 7.455 &0.052\\
+4c3x & FAD N5 &  TYR 119 OH &  7.762 &0.063\\
+4c3y & FAD N5 &  TYR 487 OH & 5.297 &0.061\\
+4c3x & FAD N5 &  TYR 487 OH &   5.486 &0.026\\
+4c3y & TYR 119 CA &  TYR 318 CA & 9.132 & 0.014\\
+4c3x & TYR 119 CA &  TYR 318 CA  & 9.193 & 0.018\\
+4c3y & TYR 487 CA &  TYR 318 CA & 8.893 & 0.010\\
+4c3x & TYR 487 CA &  TYR 318 CA  & 8.962 & 0.016\\
+4c3y & TYR 487 CA &  TYR 119 CA & 7.315 & 0.014\\
+4c3x & TYR 487 CA &  TYR 119 CA  & 7.384 & 0.017\\
+ \hline
+ 
+\end{tabular}
+ 
+\end{section}
+
+
+\input{KSTD_MD.tex}
+
+\begin{section}{Uwagi dotyczące przechowywania plików z gaussiana}
+
+Wszystkie dane pochodzące z obliczeń zostały zorganizowane w analogiczny sposób: w katalogu dotyczacym danego mechanizmu/modelu znajdują się katalogi nazwane kolejno TS1, TS2...
+W każdym katalogu, który dotyczy obliczeń pojedynczego stany przejściowego znajdują się następujące podkatalogi:
+\begin{itemize}
+ \item \path{freq_verify} -- zawiera obliczenia drgań dla struktury znalezionego stanu przejściowego, ponadto zawiera podfoldery zawierające obliczenia SP
+ \item \path{irc_reverse} -- obliczenia IRC dla znalezionej struktury stanu przejściowego (tylko w jedną strone wektora odpowiadającemu urojonej częstotliwości), w jego wnętrzu znajduje
+ się podkatalog opt/ (optymalizacja geometrii), a w jego wnętrzu podkatalogi odpowiadające obliczeniom SP oraz drgań dla zoptymalizowanej struktury
+ \item \path{irc_forward} -- analogicznie jak dla irc reverse/ z tą różnicą, że tutaj IRC zostało wykonane w przeciwną stronę.
+ \item \path{dumped_structures} -- zawiera struktury: stanu przejściowego, oraz zoptymalizowane struktury produktu i substratu (dla tego etapu reakcji) w postaci plików wejściowych Gaussiana
+ \item pozostałe katalogi zawierają obliczenia skanów itd.
+\end{itemize}
+
+ 
+\end{section}
+
+
+\input{KSTD_QM_I.tex}
+
+\input{KSTD_QM_II.tex}
+
+\input{KSTD_ONIOM.tex}
+
+\input{KSTD_fDYNAMO.tex}
+
+\input{KSTD_QM_III.tex}
+
+
+\begin{section}{Model AcmB QM}
+
+W skład modelu klasterowego AcmB weszły następujące reszty:
+\begin{itemize}
+ \item Ser49-Gly50-Gly51-Ala52
+ \item Tyr115
+ \item Tyr118
+ \item Thr542-Leu543
+ \item Tyr363
+ \item Tyr467
+ \item Tyr536
+\end{itemize}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{AcmB_I/ts1_tyr.png}
+\end{figure}
+ 
+\end{section}
+
+\begin{section}{Przeszukiwanie bazy PDB}
+ Przeanalizowano struktury zawarte w Protein Data Bank (PDB) pod kątem występowania podobnych łańcuchów wiązań wodorowych do tych znalezionych w KSTD (a w szczególności zawierających kilka tyrozyn) w pobliżu
+ ligandów. Jako ligandy kwalifikowano wszystkie reszty, które nie były aminokwasami, zasadami azotowymi, wodą, prostymi anionami lub jonami metali. Następnie w promieniu 3.5 \angstrom od potencjalnego liganda,
+ szukano atomów, które mogły rozpoczynać łańcuch wiązań wodorowych. Jako takie atomy kwalifikowano [nazwa reszty: nazwy atomów]:
+ \begin{itemize}
+  \item Ser: OG
+  \item Cys: SG
+  \item Thr: OG1
+  \item Asp: OD1, OD2
+  \item Lys: NZ
+  \item Glu: OE1, OE2
+  \item Arg: NH1, NH2
+  \item His: ND1, NE2
+  \item Tyr: OH
+ \end{itemize}
+
+ Następnie w promieniu 3.5 \angstrom wokół każdego z atomów znalezionych w ten sposób szukano kolejnych, które mogą tworzyć z nim wiązanie wodorowe. W ten sposób budowano kolejne sieci wiązań wodorowych.
+ Przeanalizowano całą bazę PDB (około 140 tysięcy struktur).
+ 
+ Jeśli chodzi o łańcuchy wiązań wodorowych składających się z samych tyrozyn to znaleziono 1712 sieci typu Tyr-Tyr (1005 plików pdb) oraz 75 sieci typu Tyr-Tyr-Tyr (34 pliki pdb).
+ Spośród tych 34 plików pdb zawierających sieć typu Tyr-Tyr-Tyr 12 zawierało również cząsteczke steroidu w sąsiedztwie [plik pdb, reszty tworzące sieć]:
+ \begin{itemize}
+  \item 2HZQ: A22, A46, A98
+  \item 3OWU: A16, A32, A57
+  \item 3OWS: A16, A32, A57
+  \item 1OH0: A16, A32, A57
+  \item 1E3V: A16, A32, A57
+  \item 1W6Y: A16, A32, A57
+  \item 1CQS: A16, A32, A57
+  \item 3OWY: A16, A32, A57
+  \item 3FZW: A16, A32, A57
+  \item 5KP4: B16, B32, B57
+  \item 1OGX: A16, A32, A57
+  \item 1E3R: A16, A32, A57
+  \item 4C3Y: A119, A318, A487
+ \end{itemize}
+
+ Przykład znalezionej struktury z pliku 3OWU:
+ 
+  \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{proton_relay/3owu.png}
+\end{figure}
+
+Enzym ze struktury 3OWU również katalizuje reakcje odworodnienia i podobnie jak w KSTD produkt przejściowy jest stabilizowany przez tautomeryzacje keto enolową i wiązanie wodorowe z jedną z tyrozyn:
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{proton_relay/3owuMechanism.jpg}
+\end{figure}
+
+
+Oczywiście sieci wiązań wodorowych zawierających tyrozyny obok innych reszt jest znacznie więcej. Przykładowo wśród sieci zawierających maksymalnie 4 atomy (186024 sieci, 56098 plików pdb) istnieje 
+4125 sieci (2367 plików PDB) zawierających dwie reszty tyrozyny oraz 84 sieci (40 plików pdb) zawierających 3 reszty tyrozyny. 
+ 
+ Oczywiście zastosowana metoda jest dość prymitywna i czasami prowadzi do ciekawych znalezisk. Największa sieć wiązań wodorowych składała się z aż 42 atomów (pdb: 3QPE), sieć widoczna poniżej:
+ 
+   \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{proton_relay/3qpe.png}
+\end{figure}
+ 
+\end{section}
+
+\end{document}

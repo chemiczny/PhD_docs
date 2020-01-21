@@ -1,0 +1,308 @@
+\begin{section}{Dynamika molekularna KSTD I}
+
+Cząsteczki występujące w modelu:
+\begin{itemize}
+ \item białko: 4c3y, pobrane z bazy PDB, łańcuch A
+ \item FAD: geometria dostępna ze struktury krystalicznej
+ \item AND: androst-4-en-3,17-dion, geometria na podstawie produktu zadokowanego w strukturze krystaliczenej
+ \item TYR318: zdeprotonowana tyrozyna, ze względu na brak takiej reszty w oryginalnym polu siłowym amber konieczność parametryzacji
+\end{itemize}
+
+Wykorzystane oprogramowanie:
+\begin{itemize}
+ \item AMBER 16
+ \item Gaussian16
+ \item RESP
+ \item propka
+ \item H++
+ \item serwer do przygotowywania białka do dynamiki: http://www.playmolecule.org/
+ \item moduł pythonowy htmd
+\end{itemize}
+
+
+\begin{subsection}{Przygotowanie obliczeń}
+
+\begin{subsubsection}{Białko}
+ pKa aminokwasów zostało oszacowane za pomocą programów: propka3.1 oraz H++. Struktura wykorzystana w obliczeniach zawierała ligandy (FAD oraz AND). 
+ 
+ Poniżej zestawienie wyników (posortowane rosnąco względem różnicy pKa):
+ 
+%   \begin{tabular}{|| c c c c||} 
+\begin{longtable}{| p{.25\textwidth} | p{.25\textwidth} | p{.25\textwidth} | p{.25\textwidth} |} 
+ \hline
+ Reszta & propka & H++ & różnica  \\ [0.5ex] 
+ \hline\hline
+GLU-87 & 4.22 & 4.170 & 0.04\\
+GLU-375 & 2.57 & 2.631 & 0.06\\
+ASP-83 & 3.87 & 3.942 & 0.07\\
+GLU-215 & 4.65 & 4.727 & 0.07\\
+GLU-71 & 3.27 & 3.178 & 0.09\\
+GLU-201 & 4.67 & 4.575 & 0.09\\
+ASP-138 & 3.43 & 3.319 & 0.11\\
+ASP-305 & 3.36 & 3.248 & 0.11\\
+GLU-393 & 4.68 & 4.562 & 0.11\\
+ASP-330 & 4.01 & 4.131 & 0.12\\
+GLU-123 & 4.68 & 4.546 & 0.13\\
+GLU-240 & 4.59 & 4.454 & 0.13\\
+GLU-7 & 4.04 & 4.182 & 0.14\\
+GLU-405 & 4.6 & 4.454 & 0.14\\
+ASP-397 & 3.95 & 3.802 & 0.14\\
+ASP-470 & 3.04 & 2.862 & 0.17\\
+GLU-364 & 4.38 & 4.193 & 0.18\\
+ASP-202 & 3.91 & 3.704 & 0.20\\
+ASP-372 & 3.93 & 3.702 & 0.22\\
+ASP-161 & 2.77 & 2.535 & 0.23\\
+GLU-433 & 4.81 & 4.561 & 0.24\\
+ASP-144 & 3.25 & 3.510 & 0.25\\
+ASP-289 & 2.81 & 2.542 & 0.26\\
+GLU-110 & 4.75 & 5.039 & 0.28\\
+GLU-62 & 4.73 & 4.425 & 0.30\\
+ASP-141 & 4.34 & 4.666 & 0.32\\
+HIS-162 & 5.52 & 5.894 & 0.37\\
+LYS-510 & 10.63 & 10.246 & 0.38\\
+LYS-361 & 10.72 & 11.133 & 0.41\\
+GLU-406 & 4.02 & 3.599 & 0.42\\
+LYS-186 & 10.38 & 10.803 & 0.42\\
+GLU-345 & 4.05 & 3.613 & 0.43\\
+GLU-192 & 4.87 & 4.405 & 0.46\\
+ASP-386 & 3.52 & 3.992 & 0.47\\
+LYS-400 & 10.55 & 11.122 & 0.57\\
+ASP-154 & 4.31 & 3.723 & 0.58\\
+GLU-411 & 4.8 & 5.387 & 0.58\\
+ASP-277 & 3.62 & 3.029 & 0.59\\
+GLU-94 & 4.13 & 3.500 & 0.62\\
+ASP-465 & 2.19 & 2.823 & 0.63\\
+GLU-376 & 4.79 & 4.155 & 0.63\\
+ASP-9 & 2.89 & 2.162 & 0.72\\
+TYR-502 & 10.93 & 11.684 & 0.75\\
+LYS-148 & 10.64 & 11.396 & 0.75\\
+GLU-237 & 4.28 & 5.044 & 0.76\\
+GLU-188 & 4.05 & 3.245 & 0.80\\
+GLU-209 & 4.79 & 3.967 & 0.82\\
+ASP-127 & 4.0 & 3.142 & 0.85\\
+LYS-121 & 10.57 & 11.446 & 0.87\\
+ASP-136 & 3.85 & 2.971 & 0.87\\
+ASP-326 & 4.94 & 4.012 & 0.92\\
+GLU-309 & 5.2 & 6.151 & 0.95\\
+LYS-380 & 10.45 & 11.412 & 0.96\\
+ASP-329 & 3.39 & 2.427 & 0.96\\
+GLU-112 & 4.21 & 3.234 & 0.97\\
+GLU-211 & 4.2 & 5.185 & 0.98\\
+ASP-40 & 3.81 & 2.807 & 1.00\\
+LYS-247 & 10.14 & 11.241 & 1.10\\
+ASP-507 & 3.93 & 2.678 & 1.25\\
+ASP-261 & 3.07 & 1.728 & 1.34\\
+GLU-286 & 4.64 & 3.127 & 1.51\\
+HIS-408 & 6.84 & 8.407 & 1.56\\
+GLU-104 & 2.84 & 1.269 & 1.57\\
+ASP-90 & 2.39 & 0.691 & 1.69\\
+GLU-85 & 4.06 & 2.323 & 1.73\\
+ASP-415 & 5.68 & 3.872 & 1.80\\
+HIS-362 & 4.3 & 6.239 & 1.93\\
+HIS-328 & 6.97 & 9.197 & 2.22\\
+ASP-68 & 2.55 & 0.301 & 2.24\\
+ASP-342 & 3.11 & 0.837 & 2.27\\
+ASP-456 & 3.64 & 0.561 & 3.07\\
+GLU-152 & 4.99 & 1.029 & 3.96\\
+ARG-344 & 12.47 & $>$12.000 & -\\
+ARG-299 & 13.5 & $>$12.000 & -\\
+TYR-414 & 14.02 & $>$12.000 & -\\
+TYR-24 & 10.45 & $>$12.000 & -\\
+TYR-473 & 13.47 & $>$12.000 & -\\
+ASP-412 & 2.87 & $<$0.000 & -\\
+ASP-446 & 4.11 & $<$0.000 & -\\
+ARG-239 & 12.77 & $>$12.000 & -\\
+ARG-150 & 13.86 & $>$12.000 & -\\
+TYR-318 & 22.84 & $>$12.000 & -\\
+ARG-176 & 11.28 & $>$12.000 & -\\
+ARG-323 & 13.07 & $>$12.000 & -\\
+CYS-282 & 13.47 & $>$12.000 & -\\
+ARG-310 & 15.29 & $>$12.000 & -\\
+ASP-118 & 5.33 & $<$0.000 & -\\
+CYS-8 & 12.04 & $>$12.000 & -\\
+GLU-233 & 6.22 & $<$0.000 & -\\
+ARG-63 & 13.98 & $>$12.000 & -\\
+TYR-119 & 17.57 & $>$12.000 & -\\
+TYR-438 & 10.14 & $>$12.000 & -\\
+ASP-404 & 1.74 & $<$0.000 & -\\
+ARG-41 & 12.89 & $>$12.000 & -\\
+ARG-114 & 13.08 & $>$12.000 & -\\
+ARG-389 & 14.35 & $>$12.000 & -\\
+TYR-120 & 12.7 & $>$12.000 & -\\
+TYR-48 & 13.05 & $>$12.000 & -\\
+ARG-223 & 12.6 & $>$12.000 & -\\
+ARG-463 & 12.33 & $>$12.000 & -\\
+ARG-204 & 13.05 & $>$12.000 & -\\
+CYS-353 & 11.83 & $>$12.000 & -\\
+TYR-487 & 14.21 & $>$12.000 & -\\
+ARG-125 & 13.69 & $>$12.000 & -\\
+GLU-37 & 3.15 & $<$0.000 & -\\
+TYR-311 & 12.66 & $>$12.000 & -\\
+ARG-218 & 12.34 & $>$12.000 & -\\
+ARG-78 & 13.15 & $>$12.000 & -\\
+ARG-74 & 15.6 & $>$12.000 & -\\
+ARG-171 & 10.56 & $>$12.000 & -\\
+ARG-409 & 11.51 & $>$12.000 & -\\
+LYS-38 & 10.13 & $>$12.000 & -\\
+LYS-220 & 10.54 & $>$12.000 & -\\
+ASP-156 & 3.57 & $<$0.000 & -\\
+LYS-450 & 6.49 & $>$12.000 & -\\
+ARG-88 & 11.39 & $>$12.000 & -\\
+ARG-503 & 11.77 & $>$12.000 & -\\
+ARG-441 & 12.83 & $>$12.000 & -\\
+TYR-76 & 13.96 & $>$12.000 & -\\
+GLU-314 & 3.46 & $<$0.000 & -\\
+CYS-419 & 10.57 & $>$12.000 & -\\
+ARG-157 & 10.86 & $>$12.000 & -\\
+LYS-394 & 11.38 & $>$12.000 & -\\
+ARG-460 & 13.64 & $>$12.000 & -\\
+ASP-319 & 4.46 & $<$0.000 & -\\
+ARG-130 & 14.06 & $>$12.000 & -\\
+ARG-190 & 12.74 & $>$12.000 & -\\
+ARG-485 & 12.34 & $>$12.000 & -\\
+TYR-92 & 14.51 & $>$12.000 & -\\
+ \hline
+ \end{longtable}
+% \end{tabular}
+ 
+ Należy zauważyć, że w przypadku TYR318 propka sugeruje pKa na poziomie 22.84 -- jest to sprzeczne z postulowanym mechanizme, ale należy pamiętać, że propka 
+ uwzględnia ligandy w obliczeniach w sposób bardzo przybliżony. Przewidywane pI przez program propKa (4.40) jest w bardzo dobrej zgodności z eksperymentalnym (4.70).
+ 
+ Aby ostatecznie przygotować cząsteczke białka do symulacji MD posłużono się narzędziem: PlayMolecule ProteinPrepare (publikacja: "PlayMolecule ProteinPrepare:
+ A Web Application for Protein Preparation for Molecular Dynamics Simulations." Martinez-Rosell, Giorgino, De Fabritiis ).
+ Narzędzie to wykorzystuje propke oraz PDB2PQR (optymalizacja wiązań wodorowych w białku) jako programy pomocnicze. Korzystając z tego i wyników uzyskanych niezależnie z propki i H++
+ ustalono stany protonacyjne aminokwasów w cząsteczce.
+ 
+ Istotne pliki:
+ 
+\begin{itemize}
+ \item \path{/home/glanowski/docs/KSTD_MD_I/proteinPrepare/monomer_substrate_final.pdb} -- struktura łańcucha A 4c3y
+ \item \path{/home/glanowski/docs/KSTD_MD_I/proteinPrepare/monomer_substrate_final.pka} -- wyniki z propKi
+ \item \path{/home/glanowski/docs/KSTD_MD_I/proteinPrepare/h++.log} -- wyniki z H++
+ \item \path{/home/glanowski/docs/KSTD_MD_I/proteinPrepare/propKavsHpp.py} -- skrypt do porównania wyników
+\end{itemize}
+
+\end{subsubsection}
+
+\begin{subsubsection}{FAD}
+
+Ładunki dla cząsteczki FAD zostąły pobrane z bazy R.E.DD.B. (https://upjv.q4md-forcefieldtools.org/REDDB/projects/F-91/, kopia projektu: \path{/home/glanowski/docs/KSTD_MD_I/FAD/F-91} ).
+Szczegóły obliczeniowe wg autorów:
+
+\begin{verbatim}
+Geometry optimization
+
+Program 1 GAUSSIAN 2003
+Theory level 1 HF
+More information 1 Tight
+Basis set 1 6-31G*
+
+Molecular electrostatic potential computation
+
+Program 2 GAUSSIAN 2003
+Theory level 2 DFT B3LYP
+More information 2 IOp(6/33=2) SCRF(IEFPCM,Solvent=Ether) NoSymm
+Basis set 2 cc-pVTZ
+
+Algorithm CONNOLLY SURFACE
+
+Information about the charge fit
+
+Program RESP
+Number of stage(s) 2
+\end{verbatim}
+
+Po pierwszym uruchomieniu obliczeń wprowadzono jedną modyfikacje w pliku frcmod: zwiększono wartość improper:\\
+\begin{verbatim}
+ h5-nb-ca-nb        10.5          180.0         2.0
+\end{verbatim}
+aby zapobiec wygięciu pierścieni w cząsteczce FAD.
+
+Ładunki cząstkowe atomów w cząsteczce FAD:
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{MD_KSTD_I/FAD/FAD_charges1.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{MD_KSTD_I/FAD/FAD_charges2.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{MD_KSTD_I/FAD/FAD_charges3.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{MD_KSTD_I/FAD/FAD_charges4.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{MD_KSTD_I/FAD/FAD_charges5.png}
+\end{figure}
+ 
+\end{subsubsection}
+
+\begin{subsubsection}{AND}
+Cząsteczka androst-4-en-3,17-dionu została zoptymalizowana w próżni (gaussian09 b3lyp/6-31g(d)). Dla zoptymalizowanej struktury
+przeprowadzono obliczenia ESP. Następnie za pomocą programu antechamber(RESP) przekonwertowano uzyskany plik gesp na plik mol2, zwierający ładunki atomów.
+Utworzono również pliki prepi oraz frcmod.
+Pliki z obliczeń:
+\path{/home/glanowski/docs/KSTD_MD_I/AND}
+
+ 
+\end{subsubsection}
+
+\begin{subsubsection}{Zdeprotonowana tyrozyna}
+
+Aby obliczyć ładunki zdeprotonowanej tyrozyny, zoptymalizowano geometrie (gaussian09 b3lyp/6-31g(d)) następującej cząsteczki:
+
+\begin{figure}[H]
+  \includegraphics[width=0.5\linewidth]{MD_KSTD_I/TYM/tym_capped.png}
+\end{figure}
+
+Następnie wykorzystano program RESP z opcją wymuszenia ładunków na N i C końcu peptydu (w ten sposób sumaryczny ładunek reszty będzie równy dokładnie -1):
+
+\begin{figure}[H]
+  \includegraphics[width=0.5\linewidth]{MD_KSTD_I/TYM/ace_with_charges.jpg}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=0.5\linewidth]{MD_KSTD_I/TYM/nme_with_charges.jpg}
+\end{figure}
+
+Ładunki cząstkowe na reszcie zdeprotonowanej tyrozyny:
+\begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{MD_KSTD_I/TYM/charges.png}
+\end{figure}
+
+Warto zauważyć, że ładunki na równocennych atomach są identyczne -- czyli tak jak powinno być.
+
+Źródło: \path{http://ambermd.org/tutorials/advanced/tutorial1/section1.htm}
+Pliki z obliczeń:
+\path{/home/glanowski/docs/KSTD_MD_I/TYM}
+
+\end{subsubsection}
+
+ 
+\end{subsection}
+
+\begin{subsection}{Obliczenia}
+Cały model KSTD został najpierw zminimalizowany w 5 krokach. W pierwszych 4 krokach na atomy białka i ligandów został nałożony dodatkowy potencjał mający ograniczyć ich ruch, 
+tak aby najpierw zoptymalizować wygenerowane cząsteczki wody. Stałe siłowe wynosiły kolejno: 500, 250, 100 i 10 $\frac{kcal}{mol \cdot \angstrom^2 }$.
+
+Następnie model został ogrzany do 303 K w czasie 100 ps, w warunkach stałej objętości. Na białko i ligandy nałożony został nieznaczny dodatkowy potencjał
+1 $\frac{kcal}{mol \cdot \angstrom^2 }$ aby zabezpieczyć ich strukturę. W kolejnym kroku przeprowadzono 100 ps dynamiki pod stałym ciśnieniem z identycznym dodatkowym potencjałem, w 
+temperaturze 303 K. W ten sposób przygotowano model do właściwej symulacji dynamiki molekularnej (stałe ciśnienie, 303 K).
+
+Ostatecznie przeprowadzono 132 ns symulacji, jednakże już po upływie 45 ns wybrano jej fragment do dalszej analizy. 20 nanosekund (oznaczone zieloną ramką) poddano analizie skupień.
+Zastosowano metodę k-średnich. Do inicjalizacji analizy skupień wybrano w sposób losowy co dziesiątą klatke. 
+Liczba klastrów wynosiła 5, ostatecznie wybrano strukture leżącą najbliżej centroidu najczęśćiej występującego skupiska.
+
+
+
+\begin{figure}[H]
+  \includegraphics[width=0.5\linewidth]{MD_KSTD_I/rmsdGutSel.png}
+\end{figure}
+
+\end{subsection}
+
+\end{section}

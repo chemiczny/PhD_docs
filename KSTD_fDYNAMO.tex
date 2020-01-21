@@ -1,0 +1,75 @@
+\begin{section}{Model QMMM II: fDYNAMO}
+%środa
+Wychodząc z wychłodzonego modelu po dynamice molekularnej przygotowano kolejny model QMMM. W warstwie MM zastosowano to samo pole AMBER, które było już wykorzystane
+w modelowaniu QMMM ONIOM oraz MD. Do obszaru QM wybrano:
+
+\begin{itemize}
+ \item AND: androst-4-en-3,17-dion
+ \item TYR318
+ \item FAD
+\end{itemize}
+
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/highLayerDynamoRC.png}
+\end{figure}
+
+Jako ruchome atomy wybrano wszystkie reszty w promieniu 20 \angstrom od cząsteczki AND.
+
+Po optymalizacji geometrii przeprowadzono dwuwymiarowy skan powierzchni energii potencjalnej amber:AM1 oraz amber:RM1. Wyniki sugerują to co poprzednie obliczenia: jedyny
+prawdopodobny mechanizm  jest dwuetapowy i musi zaczynać się od transferu atomu wodory z atomu węgla C2.
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/AM1_PES.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/RM1_PES.png}
+\end{figure}
+
+Następnie wykorzystano geometrie ze zrelaksowanego skanu do znalezienia struktur TS1 oraz TS2 na poziomie amber:AM1 oraz amber:RM1. Struktury stanów przejściowych zostały zweryfikowane
+przez obliczenia IRC -- wówczas okazało się, że metoda RM1 nie oddaje poprawnie struktury produktu przejściowego, dlatego też nie używano jej więcej do modelowania tej reakcji.
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/IRM12.png}
+\end{figure}
+
+
+W kolejnym kroku przeprowadzono jednowymiarowe skany poprzez całą ścieżkę reakcji (amber:AM1), dla każdego z tych skanów obliczono również energie SP amber:b3lyp oraz amber:m062x.
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/ts1_sp.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/ts2_sp.png}
+\end{figure}
+
+Następnie przeprowadzono obliczenia PMF (amber:AM1) wykorzystując struktury z jednowymiarowych skanów. Parametry obliczeń PMF:
+\begin{itemize}
+ \item 303 K
+ \item 40 ps 
+ \item 40 000 kroków na okno
+ \item 400 zapisanych sktruktur na okno
+ \item 90 okien
+\end{itemize}
+
+Pełny profil energetyczny reakcji uzyskano poprzez WHAM (Weighted Histogram Analysis Method). Wykorzystując obliczenia SP dla amber:b3lyp oraz amber:m062x uzyskano poprawki spline.
+
+W kolejnym etapie obliczeń znaleziono 10 struktur TS1 oraz 10 struktur TS2 (amber:AM1). Zostały one wybrane na podstawie różnicy między wartością ich współrzędnej reakcji oraz wartości współrzędnej reakcji
+odpowiadającej maksimum energii w profilu PMF. Każda ze znalzionych geometrii stanów przejściowych została zweryfikowana przez obliczenia drgań oraz IRC (struktury po IRC również zostały zoptymalizowane
+i poddane obliczeniom drgań).
+
+Na tej podstawie przeprowadzono pierwsze obliczenia Kinetycznego Efektu Izotopowego.
+
+\begin{subsection}{2D PES amber:DFT}
+Korzystając ze struktur zoptymalizowanych podczas dwuwymiarowego skanu amber:AM1, przeprowadzono serie obliczeń SP z wykorzystaniem kilku funkcjonałów DFT.
+Celem zmiejszenia czasu obliczeniowego, obszar QM został ograniczony do następującej struktury:
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/smallQM_DFT_SP.png}
+\end{figure}
+ 
+\end{subsection}
+
+
+\end{section}

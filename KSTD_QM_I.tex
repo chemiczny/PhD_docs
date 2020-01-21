@@ -1,0 +1,170 @@
+\begin{section}{Model QM I}
+ W skład pierwszego modelu klasterowego KSTD weszło 196 atomów. Złożyły się na to następujące reszty:
+ \begin{itemize}
+  \item androst-4-en-3,17-dion
+  \item FAD (fragment)
+  \item GLY50-ALA51-SER52
+  \item TYR119
+  \item TYR318
+  \item TYR487
+  \item GLY491
+ \end{itemize}
+
+ Zamrożone atomy są widoczne na poniższych obrazkach jako powiększone sfery.
+ 
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QM_I/s1.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QM_I/s2.png}
+\end{figure}
+ 
+ Pierwszym modelowanym mechanizmem był ten zaproponowany w literaturze. Przeprowadzone serie obliczeń PES stosując ub3lyp/6-31G(d,p), tj jednowymiarowy skan odrywający
+ wodór z atomu C2, a następnie kolejny jednowymiarowy skan odrywający wodór z atomu C1. Po analizie uzyskanych wyników okazało się, że 
+ równie dobrze można stosować b3lyp/6-31G(d,p) -- macierze współczynników orbitali molekularnych $\alpha$ i $\beta$ były identyczne. Następnie dla znalezionych maksimów energii
+ dla każdego ze skanów przeprowadzono obliczenia drgań, a uzyskane wyniki pozwoliły na znalezienie stanów przejściowych stosujac algorytm Berny'ego. Uzyskane struktury zostały
+ zweryfikowane poprzez obliczenia drgań oraz IRC. Ostatecznie geometrie z obliczeń IRC zostały dodatkowo zoptymalizowane i poddane obliczeniom drgań -- by mieć pewność, że odpowiadają
+ minimum lokalnym.
+ 
+ Poniżej tabelaryczne zestawienie profilu reakcji:
+ 
+  \begin{tabular}{||c c c c c c||} 
+ \hline
+ Metoda/Baza & TS1 & I z TS1 & I z TS2 & TS2 & P \\ [0.5ex] 
+ \hline\hline
+b3lyp/6-31G(d,p) & 13.96 &  0.16 & 0.15 & 14.54 & -6.09 \\
+ZPE b3lyp/6-31G(d,p) & -2.37  & -0.27 &  -0.27  & -3.10 & 0.23 \\
+PCM(eps = 4) b3lyp/6-31G(d,p) & 16.49  & 4.12 & 4.13 & 19.87 & 1.16 \\
+b3lyp/6-311+G(2d,2p) & 14.17  & 0.06  & 0.06 & 14.90 & -7.90 \\
+PCM(eps = 4) b3lyp/6-311+G(2d,2p) & 16.51  & 3.71 & 3.71  & 19.77 & -0.78 \\
+PCM(eps = 4) b3lyp/6-311+G(2d,2p) & & & & & \\ 
++ ZPE b3lyp/6-31G(d,p)  & 14.14  & 3.44  & 3.44 & 16.66 & -0.54 \\
+ \hline
+ 
+\end{tabular}
+ 
+ Do celów porównawczych przeprowadzono również obliczenia SP dla wybranych struktur z użyciem innych funkcjonałów (obliczenia w g09 więc wynik dla B3LYP również nieco się różni):
+ 
+   \begin{tabular}{||c c c c  c||} 
+ \hline
+ Metoda/Baza & TS1 & I z TS1 & TS2 & P \\ [0.5ex] 
+ \hline\hline
+blyp/6-31G(d,p) & 13.88 & -2.01 & 11.54 & -3.14  \\
+b3lyp/6-31G(d,p) & 14.23 &  0.30 & 14.85 & -5.91  \\
+pbe/6-31G(d,p) & 10.90 & -2.33  & 7.43 & -2.83  \\
+bp86/6-31G(d,p) & 10.12 & -3.75  & 7.21 & -3.08  \\
+m05/6-31G(d,p) & 14.96 &  3.65 & 15.91 & -5.91  \\
+m052x/6-31G(d,p) & 10.53 &  0.41 & 12.10 & -9.89  \\
+m06l/6-31G(d,p) & 12.73 & 0.61  & 10.96 & 1.56  \\
+m06/6-31G(d,p) & 10.16 &  -0.36 & 9.29 & -5.14  \\
+m062x/6-31G(d,p) & 8.53 &  -1.18 & 11.33 & -8.62  \\
+tpss/6-31G(d,p) & 13.50 & -0.79  & 12.32 & -1.23  \\
+ \hline
+ 
+\end{tabular}
+ 
+ Oczywiście wyniki te byłyby bardziej wiarygodne gdyby przeprowadzić SP dla całego skanu, lub zoptymalizować geometrie dla każdego funkcjonału osobno (uwzględniając ZPE oraz
+ rozpuszczalnik). Obliczenia zostały wykonane jedynie
+ w celach poglądowych. Co ciekawe aż połowa z badanych funkcjonałów sugerowałaby, że etapem limitującym reakcje jest ten pierwszy. 
+ 
+ Pliki z obliczeń:
+ \path{/net/archive/groups/plggkatksdh/QM_models/QM_I/relaxed}
+ 
+ \begin{subsection}{Model z cząsteczką wody}
+  Biorąc pod uwagę nietypową sytuacje związaną ze zdeprotonową tyrozyną, rozważono możliwość, że istotnym czynnikiem stabilizującym
+  ten układ może być cząsteczka (lub cząsteczki) wody. Aby zweryfikować tą hipotezę do przygotowanego modelu wprowadzono jedną
+  cząsteczke wody. Celem sprawdzenia gdzie mogłaby ona być ulokowana sprawdzono dostępną strukturę krystaliczną pod kątem
+  występowania wody w otoczeniu centrum aktywnego.
+  
+   \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QM_I/4c3y_wat.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QM_I/4c3y_wat2.png}
+\end{figure}
+  
+  W obrębie wszystkich łańcuchów ze struktury krystalicznej, położenie cząsteczek wody względem centrum aktywnego wygląda niemal
+  identycznie. Dlatego też umieszczono jedną taką cząsteczke pomiędzy pierścieniami TYR 318 a TYR 119 modelu QM pochodzącego 
+  ze struktury po MD.
+  
+     \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QM_I/wat1.png}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QM_I/wat2.png}
+\end{figure}
+  
+  Poniżej profil energetyczny reakcji uzyskany za pomocą powyższego modelu:
+  
+    \begin{tabular}{||c c c c c c||} 
+ \hline
+ Metoda/Baza & TS1 & I z TS1 & I z TS2 & TS2 & P \\ [0.5ex] 
+ \hline\hline
+b3lyp/6-31G(d,p) & 15.75 &  2.63 & 2.63 & 17.74 & -2.15 \\
+ZPE b3lyp/6-31G(d,p) & -2.52  & -0.43 &  -0.43  & -3.38 & -0.23 \\
+PCM(eps = 4) b3lyp/6-31G(d,p) & 18.11  & 6.26 & 6.26 & 22.83 & 4.60 \\
+b3lyp/6-311+G(2d,2p) & 15.56  & 2.52  & 2.52 & 17.84 & -4.39 \\
+PCM(eps = 4) b3lyp/6-311+G(2d,2p) & 17.62  & 5.75 & 5.75  & 22.37 & 2.16 \\
+PCM(eps = 4) b3lyp/6-311+G(2d,2p) & & & & & \\ 
++ ZPE b3lyp/6-31G(d,p)  & 15.10  & 5.32  & 5.32 & 18.99 & 1.92 \\
+ \hline
+ 
+\end{tabular}
+
+Porównując struktury tego modelu z jego odpowiednikiem bez cząsteczki wody można zauważyć bardzo drobne różnice w położeniach
+atomów. Jak widać drugi etap reakcji uległ znacznie większej destabilizacji. 
+
+Pliki z obliczeń:
+\path{/net/archive/groups/plggkatksdh/QM_models/QM_I/relaxed_water}
+  
+ \end{subsection}
+
+  
+ \begin{subsection}{Model ze struktury krystalicznej}
+ 
+ Przeprowadzono również analogiczne obliczenia wychodząc ze struktury krystalicznej 4c3y.
+  
+      \begin{tabular}{||c c c c c c||} 
+ \hline
+ Metoda/Baza & TS1 & I z TS1 & I z TS2 & TS2 & P \\ [0.5ex] 
+ \hline\hline
+b3lyp/6-31G(d,p) & 14.88 &  5.68 & 4.89 & 17.78 & 5.87 \\
+ZPE b3lyp/6-31G(d,p) & -1.77  & 0.69 &  0.85  & -1.46 & 1.48 \\
+PCM(eps = 4) b3lyp/6-31G(d,p) & 17.17  & 9.30 & 9.16 & 22.41 & 8.59 \\
+b3lyp/6-311+G(2d,2p) & 15.75  & 7.19  & 7.55 & 20.63 & 5.93 \\
+PCM(eps = 4) b3lyp/6-311+G(2d,2p) & 18.13  & 10.70 & 11.69  & 24.99 & 8.38 \\
+PCM(eps = 4) b3lyp/6-311+G(2d,2p) & & & & & \\ 
++ ZPE b3lyp/6-31G(d,p)  & 16.36  & 11.39  & 12.53 & 23.53 & 9.85 \\
+ \hline
+ 
+\end{tabular}
+
+W porównaniu do poprzednio omawianych modeli występują znaczne różnice w strukturach. Przede wszystkim:
+\begin{itemize}
+ \item odległość C$\alpha$ TYR 119 do C$\alpha$ TYR 487 w modelu z sieci krystalicznej wynosi około 7.4 \angstrom, natomiast w zrelaksowanym 9.9 \angstrom
+ \item w przypadku modelu zrelaksowanego struktura produktu ulega znacznej deformacji: tworzy się wiązanie wodorowe pomiędzy TYR 487 a cząsteczką FAD, model z sieci krystalicznej zachowuje
+ postać podobną do geometrii początkowej
+\end{itemize}
+
+  
+  Pliki z obliczeń:
+  \path{/net/archive/groups/plggkatksdh/QM_models/QM_I/crystal}
+ \end{subsection}
+
+ \begin{subsection}{Uwagi końcowe}
+ 
+ Pierwszy model klasterowy miał szereg wad:
+ \begin{itemize}
+  \item bardzo duże różnice pomiędzy strukturą produktu, a pozostałymi
+  \item wpływ rozpuszczalnika (modelowanego) jako PCM jest znaczny, szczególnie dla energii stanów przejściowych
+  \item na końcowy profil energetyczny złożyło się kilka czynników, które niejednoznacznie wskazują, który etap jest faktycznie limitujący
+ \end{itemize}
+ 
+ Biorąc pod uwagę powyższe uwagi postanowiono powiększyć model -- powinno to pozwolić na zmniejszenie wpływu PCM na końcowy profil energetyczny.
+
+  \end{subsection}
+ 
+\end{section}

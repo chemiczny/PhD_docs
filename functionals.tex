@@ -1,0 +1,60 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{polski}
+\usepackage[polish]{babel}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{blindtext}
+
+\begin{document}
+
+    \begin{equation}
+    KIE_{TS1} \left( \Delta  G^{QC}_{act} \right) = 4.742 \pm 0.101
+  \end{equation}
+  
+   \begin{equation}
+    KIE^I_{TS2} \left( \Delta  G^{QC}_{act} \right) = 4.482 \pm 0.050
+  \end{equation}
+  
+  
+  
+  \begin{equation}
+    KIE^S_{TS2} \left( \Delta  G^{QC}_{act} \right) = 4.591 \pm 0.059
+  \end{equation}
+  
+
+
+   \begin{tabular}{||c c c c c c||} 
+ \hline
+ Metoda/Baza & TS1 & I z TS1 & I z TS2 & TS2 & P \\ [0.5ex] 
+ \hline\hline
+b3lyp/6-31G(d,p) & 13.96 &  0.16 & 0.15 & 14.54 & -6.09 \\
+\hline
+b3lyp/6-311+G(2d,2p) & & & & & \\ 
+PCM(eps = 4)  & 14.14  & 3.44  & 3.44 & 16.66 & -0.54 \\
++ ZPE b3lyp/6-31G(d,p) & & & & & \\ 
+\hline\hline
+blyp/6-31G(d,p) & 18.07 &  2.32 & 2.32 & 15.83 & 6.14 \\
+\hline
+blyp/6-311+G(2d,2p) & & & & & \\ 
+PCM(eps = 4)  & 14.16  & 1.75  & 1.76 & 13.48 & 5.86 \\
++ ZPE blyp/6-31G(d,p)  & & & & & \\ 
+\hline\hline
+pbe/6-31G(d,p) & 10.98 &  -2.11 & -2.11 & 8.09 & 0.21 \\
+\hline
+pbe/6-311+G(2d,2p) & & & & & \\ 
+PCM(eps = 4)  & 11.06  & 1.52  & 1.53 & 9.34 & 4.04 \\
++ ZPE pbe/6-31G(d,p)  & & & & & \\ 
+ \hline
+ 
+\end{tabular}
+
+ 
+\end{document}
