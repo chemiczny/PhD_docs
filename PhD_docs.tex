@@ -21,14 +21,22 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
+
 \begin{section} {Porównanie struktur krystalicznych 4c3y oraz 4c3x}
 
-Dehydrogenaza pochodząca z \textit{Rhodococus erythropolis} została skrytalizowana z produktem zadokowanym w centrum aktywnym oraz bez. Każda z tych struktur zawiera 2 tetramery 
-białek. Poniżej krótkie zestawienie niektórych parametrów geometrycznych (wszystkie obliczone jako średnia z ośmiu struktur).
+Dehydrogenaza pochodząca z \textit{Rhodococus erythropolis} została skrytalizowana z produktem zadokowanym w centrum aktywnym (PDB: 4c3y)
+oraz bez (PDB: 4c3x). Każda z tych struktur zawiera 2 tetramery 
+białek. 
+
+\begin{subsection} {Względne położenie TYR 119, TYR 318, TYR 487 i FAD}
+
+Poniżej krótkie zestawienie niektórych parametrów geometrycznych (wszystkie obliczone jako średnia z ośmiu struktur).
 
  \begin{tabular}{||c c c c c||} 
  \hline
- Struktura & Atom 1. & Atom 2. & Średnia odległość & Odchylenie standardowe \\ [0.5ex] 
+ Struktura & Atom 1. & Atom 2. & Średnia  & Odchylenie  \\  
+           &         &         & odległość & standardowe \\ [0.5ex]
  \hline\hline
 4c3y & TYR 119 OH &  TYR 318 OH & 2.583 &0.008\\
 4c3x & TYR 119 OH  & TYR 318 OH &  2.618 &0.004\\
@@ -51,6 +59,14 @@ białek. Poniżej krótkie zestawienie niektórych parametrów geometrycznych (w
  \hline
  
 \end{tabular}
+ 
+ Jak widać względnie położenie atomów $C\alpha$ tyrozyn w centrum aktywnym jest praktycznie stałe. Nieco większe zmiany widać w odległości do atomu $N5$ cząsteczki FAD. 
+ Z danych krystalicznych wynika, że bez zadokowanej cząsteczki w centrum aktywnym atom FAD N5 jest nieco bardziej oddalony od atomów OH cząsteczek tyrozyn, niż w przypadku jej obecności.
+ Oczywiście to porównanie ma sens tylko jeśli krystalizacja mniej zaburza strukturę centrum aktywnego niż obecność ligandu.
+ 
+ \end{subsection}
+
+ 
  
 \end{section}
 
@@ -147,7 +163,7 @@ W skład modelu klasterowego AcmB weszły następujące reszty:
   \includegraphics[width=0.8\linewidth]{proton_relay/3owu.png}
 \end{figure}
 
-Enzym ze struktury 3OWU również katalizuje reakcje odworodnienia i podobnie jak w KSTD produkt przejściowy jest stabilizowany przez tautomeryzacje keto enolową i wiązanie wodorowe z jedną z tyrozyn:
+Enzym ze struktury 3OWU również katalizuje reakcje odwodornienia i podobnie jak KSTD produkt przejściowy jest stabilizowany przez tautomeryzacje keto enolową i wiązanie wodorowe z jedną z tyrozyn:
 
  \begin{figure}[H]
   \includegraphics[width=0.8\linewidth]{proton_relay/3owuMechanism.jpg}

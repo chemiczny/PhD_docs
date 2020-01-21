@@ -20,7 +20,7 @@ Po optymalizacji geometrii przeprowadzono dwuwymiarowy skan powierzchni energii 
 prawdopodobny mechanizm  jest dwuetapowy i musi zaczynać się od transferu atomu wodory z atomu węgla C2.
 
  \begin{figure}[H]
-  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/AM1_PES.png}
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/AM1_AND_PES.png}
 \end{figure}
 
  \begin{figure}[H]
@@ -59,15 +59,90 @@ W kolejnym etapie obliczeń znaleziono 10 struktur TS1 oraz 10 struktur TS2 (amb
 odpowiadającej maksimum energii w profilu PMF. Każda ze znalzionych geometrii stanów przejściowych została zweryfikowana przez obliczenia drgań oraz IRC (struktury po IRC również zostały zoptymalizowane
 i poddane obliczeniom drgań).
 
-Na tej podstawie przeprowadzono pierwsze obliczenia Kinetycznego Efektu Izotopowego.
+Na tej podstawie przeprowadzono pierwsze obliczenia Kinetycznego Efektu Izotopowego, miały one jednak charakter wyłącznie orientacyjny, ze względu na inną strukturę substratów wykorzystanych do 
+eksperymentów.
 
 \begin{subsection}{2D PES amber:DFT}
-Korzystając ze struktur zoptymalizowanych podczas dwuwymiarowego skanu amber:AM1, przeprowadzono serie obliczeń SP z wykorzystaniem kilku funkcjonałów DFT.
-Celem zmiejszenia czasu obliczeniowego, obszar QM został ograniczony do następującej struktury:
+Korzystając ze struktur zoptymalizowanych podczas dwuwymiarowego skanu amber:AM1, przeprowadzono serie obliczeń SP z wykorzystaniem funkcjonału B3LYP. Pod względem jakościowym mapa energii potencjalnej wygląda
+bardzo podobnie jak w przypadku AM1 -- wygląda na to, że możliwe są tylko dwa dwuetapowe mechanizmy, z czego jeden z nich chcarakteryzuje się znacznie wyższą barierą niż drugi.
 
  \begin{figure}[H]
-  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/smallQM_DFT_SP.png}
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/B3LYP_AND_PES.png}
 \end{figure}
+ 
+\end{subsection}
+
+\begin{subsection} { Pozostałe cząsteczki }
+
+Przeprowadzono również analogiczne modelowanie dla cząsteczek, dla których przeprowadzone zostały eksperymenty związane z wyznaczeniem kinetycznego efektu izotopowego:
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/subs2/structure.jpg}
+   \caption{$2,2,4,6,6-d^{5}-17-$metylotestosteron​}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/subs3/structure.jpg}
+  \caption{ $1\alpha,16,16,17-d^{4}-$dihydrotestosteron }
+\end{figure}
+ 
+ Dla każdej z tych cząsteczek przeprowadzono obliczenia PES (analogicznie jak dla AND). Było to szczególnie istotne dla substratu bez podwójnego wiązania w pierścieniu A -- jak widać na poniższych obrazkach, 
+ jakościowo oba wykresy wyglądają bardzo podobnie.
+ 
+  \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/subs2/pes.png}
+   \caption{$2,2,4,6,6-d^{5}-17-$metylotestosteron​}
+\end{figure}
+
+ \begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{QMMM_fdynamo/subs3/pes.png}
+  \caption{ $1\alpha,16,16,17-d^{4}-$dihydrotestosteron }
+\end{figure}
+ 
+ Następnie dla każdego z tych dwóch substratów przeprowadzono obliczenia jednowymiarowych skanów energii wzdłuż każdej ze wsprółrzędnych reakcji. Wygenerowane struktury posłużyły do
+ obliczeń PMF o parametrach:
+ \begin{itemize}
+ \item 303 K
+ \item 40 ps 
+ \item 40 000 kroków na okno
+ \item 400 zapisanych sktruktur na okno
+ \item 90 okien
+\end{itemize}
+
+Wyniki zostały przeanalizowane z wykorzystaniem metody WHAM, dzięki czemu uzyskano uśrednione profile energetyczne. Stąd wyznaczono współrzędne reakcji odpowiadające maksimum każdego z profilu.
+Wybrano po 10 geometrii, które były najbliższe maksimum energii i dla nich przeprowadzono optymalizacje stanu przejściowego. Każdy ze znalezionych stanów przejściowych został zweryfikowany analizą
+drgań oraz obliczeniami IRC. Na podstawie tych profili obliczono termodynamiczny kinetyczny efekt izotopowy.
+
+Dla $2,2,4,6,6-d^{5}-17-$metylotestosteron​u wyniósł on:
+ \begin{equation}
+    KIE_{TS1} \left( \Delta  G^{QC}_{act} \right) = 4.801
+  \end{equation}
+  
+  \begin{equation}
+    KIE_{TS2} \left( \Delta  G^{QC}_{act} \right) = 1.107 
+  \end{equation}
+ 
+natomiast dla $1\alpha,16,16,17-d^{4}-$dihydrotestosteronu:
+ \begin{equation}
+    KIE_{TS1} \left( \Delta  G^{QC}_{act} \right) = 1.033
+  \end{equation}
+  
+  \begin{equation}
+    KIE_{TS2} \left( \Delta  G^{QC}_{act} \right) = 4.807 
+  \end{equation}
+  
+Obliczono również BIE ( \textit{Binding Isotope Effect} ) dla obydwu tych związków. Do tego celu wykorzystano 10 zoptymalizowanych struktur QMMM zawierających cząsteczke substratu. Ograniczono obszar QM
+do samego ligandu i zoptymalizowano całość jescze raz. Wybrano również 10 losowych struktur z symulacji dynamiki molekularnej ligandu w roztworze wodnym i również je zoptymalizowano metodą QMMM.
+
+BIE dla $2,2,4,6,6-d^{5}-17-$metylotestosteron​u:
+ \begin{equation}
+    BIE \left( \Delta  G^{QC}_{act} \right) = 1.036
+  \end{equation}
+  
+ BIE dla $1\alpha,16,16,17-d^{4}-$dihydrotestosteronu:
+ \begin{equation}
+    BIE \left( \Delta  G^{QC}_{act} \right) = 1.023
+  \end{equation}
  
 \end{subsection}
 
